@@ -1,0 +1,10 @@
+<?page title="Upload Download" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Upload Download" border="normal">
+New Content Here!
+<vbox> 
+	<button id="btnSubir" label="Subir"/>
+	<button id="btnDescargar" label="Descargar"/>
+</vbox>
+</window>
+</zk>

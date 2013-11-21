@@ -1,0 +1,23 @@
+<zk>
+	<window
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.sigarep.controlador.UploadDownloadVM')"
+		title="${labels.app.titleWindow}"
+		position="center"
+		mode="overlapped"
+		border="normal"
+		width="300px"
+		height="200px">
+		<button
+			label="Subir"
+			upload="true,maxsize=8192"
+			onUpload="@command('uploadFile',upload=event)"
+			autodisable="self" />
+		<button
+			label="Descargar"
+			mold="trendy"
+			onClick="@command('downloadFile')"
+			disabled="@bind(empty vm.media)"
+			 />
+	</window>
+</zk>
