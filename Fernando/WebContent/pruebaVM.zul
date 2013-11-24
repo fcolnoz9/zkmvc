@@ -1,0 +1,103 @@
+<zk>
+<style id="estilo">
+        .fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
+        div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
+        background: white; border-top: none; border-left: none;
+        border-right: none; border-bottom: none; }
+		
+        .fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
+        .z-cell { background-color: #F7F7F7; border-bottom: 1px solid
+        transparent; border-left: 1px solid transparent; border-top: 1px
+        solid transparent; }
+
+        .fgrid .z-grid-odd .fgrid.z-row-inner,.fgrid.z-grid-odd
+        .z-cell,.fgrid.z-grid-odd { background: none repeat scroll 0 0
+        transparent; }
+
+        .fgrid tr.z-grid-odd td.z-row-inner,.fgrid tr.z-grid-odd
+        .z-cell,.fgrid tr.z-grid-odd { background: white }
+
+        .fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
+        background: white; border-top: none; }
+    </style>
+
+<window id="ventana" title="Registro Profesores" border="normal" sclass="sysWin" contentStyle="overflow:auto" apply="org.zkoss.bind.BindComposer"
+                                viewModel="@id('vm') @init('com.sigarep.viewmodels.VMprofesor')" >
+   <style src="/widgets/input/form_sample/style.css" />
+   	<grid sclass="fgrid">
+   	<auxhead>
+            <auxheader colspan="2" rowspan="2" label="Formulario de Registro" style="font-size:16px" align="left" />
+        </auxhead>
+   		<columns>
+   		 		<column label="" width="35%" />
+                <column label="" width="65%"  /> 
+   		</columns>
+   		<rows>
+   		 	<row>
+   		 	
+   		 	  <label value="Nombre:" width="150px" />  
+                    <hlayout>
+                        <textbox id="txtnombre" width="150px" tabindex="1" value="@bind(vm.nombre)" />
+       
+                        	<button label="Buscar" id="btnbuscar" image="images/search-016x016.png" onClick="@command('buscarProfesor')" />
+                        
+                    </hlayout>
+   		 	</row>
+   		 	<row>
+               <label value="Apellido:" width="150px" />
+                    <textbox  id="txtapellido" width="150px" tabindex="2" value="@bind(vm.apellido)" />
+            </row>
+            <row>
+					<label value="Sexo: " />
+					<combobox readonly="true" id= "cmbsexo"  value="@bind(vm.sexo)" width="40%">
+						<comboitem label="Masculino"/>
+						<comboitem label="Femenino"/>	
+					</combobox>
+				</row>
+            <row>
+               <label value="Email:" width="150px" />
+                    <textbox  id="txtemail" width="150px" tabindex="3"  value="@bind(vm.email)"/>
+            </row>
+   		 	<row>
+   		 			 <hlayout>
+                     </hlayout>
+                     <hlayout>
+                             <button label="Guardar" id="btnguardar" width="100px" height="30px" image="images/add-016x016.png" onClick="@command('guardar')" />
+                             <button label="Eliminar" id="btneliminar" width="100px" height="30px" />
+                             <button label="Cancelar" id="btncancelar" width="100px" height="30px" image="images/cancel-016x016.png" onClick="@command('limpiar')" />
+                     </hlayout>
+   		 	</row>
+   		 	<row>
+   		 		
+   		 	</row>
+   		
+   		</rows>
+   	</grid>
+   	<space />
+   	<space />
+   	<groupbox>
+   	<caption label="Listado de Profesores" />
+   	<space />
+   	<space />
+   	<listbox id="profeListbox" height="160px" model="@bind(vm.listaProfesor)" selectedItem="@bind(vm.profeseleccionado)"   
+   			 onSelect="@command('mostrarSeleccionado')" emptyMessage="No hay profesores registrados" mold="paging" pageSize="5">
+		<listhead>
+			<listheader label="Nombre" align="center" sort="auto(nombre)" />
+			<listheader label="Apellido" align="center" sort="auto(apellido)" />
+			<listheader label="Sexo" align="center" sort="auto(sexo)"/>
+			<listheader label="Email" width="20%"/>
+		</listhead>
+		<template name="model">
+			<listitem selected="true">
+				<listcell label="${each.nombre}" ></listcell>
+				<listcell label="${each.apellido}"></listcell>
+				<listcell label="${each.sexo}"></listcell>
+				<listcell label="${each.email}"></listcell>	
+			</listitem>
+		</template>
+	</listbox>
+	<space />
+	<space />
+	</groupbox>
+</window>
+</zk>
