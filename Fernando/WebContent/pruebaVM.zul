@@ -63,7 +63,7 @@
                      </hlayout>
                      <hlayout>
                              <button label="Guardar" id="btnguardar" width="100px" height="30px" image="images/add-016x016.png" onClick="@command('guardar')" />
-                             <button label="Eliminar" id="btneliminar" width="100px" height="30px" />
+                             <button label="Eliminar" id="btneliminar" width="100px" height="30px" onClick="@command('eliminarProfesor')" />
                              <button label="Cancelar" id="btncancelar" width="100px" height="30px" image="images/cancel-016x016.png" onClick="@command('limpiar')" />
                      </hlayout>
    		 	</row>

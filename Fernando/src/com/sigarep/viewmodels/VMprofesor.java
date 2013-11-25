@@ -22,7 +22,7 @@ public class VMprofesor {
 	private Profesor profeseleccionado;
     @Wire Textbox txtnombre;
     @Wire Window ventana;
-     public String getNombre() {
+    public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
@@ -55,8 +55,6 @@ public class VMprofesor {
 	public void setListaProfesor(List<Profesor> listaProfesor) {
 		this.listaProfesor = listaProfesor;
 	}
-	@Command
-	@NotifyChange({"nombre", "apellido", "email","sexo"})
 	public Profesor getProfeseleccionado() {
 		return profeseleccionado;
 	}
@@ -69,7 +67,7 @@ public class VMprofesor {
 		buscarProfesor();
     }
 	@Command
-	@NotifyChange({"nombre", "apellido", "email","sexo"})//el notifychange le  avisa a que parametros en la pantalla se van a cambiar, en este caso es nombre,apellido,email,sexo se va a colocar en blanco al guardar!!
+	@NotifyChange({"nombre", "apellido", "email","sexo","listaProfesor"})//el notifychange le  avisa a que parametros en la pantalla se van a cambiar, en este caso es nombre,apellido,email,sexo se va a colocar en blanco al guardar!!
 	public void guardar(){
 		if (nombre.equals("")||apellido.equals("")|| sexo.equals("Seleccione una Opcion...")|| email.equals(""))
 			Messagebox.show("Debes Llenar todos los Campos", "Advertencia", Messagebox.OK, Messagebox.EXCLAMATION);
@@ -81,7 +79,7 @@ public class VMprofesor {
 		}
 	}
 	@Command
-	@NotifyChange({"nombre", "apellido", "email","sexo","listaProfesor"})
+	@NotifyChange({"nombre", "apellido", "email","sexo"})
 	public void limpiar(){
 		nombre = "";apellido="";email="";sexo="";
 		buscarProfesor();
@@ -90,6 +88,13 @@ public class VMprofesor {
 	@NotifyChange({"listaProfesor"})
 	public void buscarProfesor(){
 		listaProfesor =sp.buscarP(nombre);
+	}
+	@Command
+	@NotifyChange({"listaProfesor"})
+	public void eliminarProfesor(){
+		sp.eliminar(nombre);
+		limpiar();
+		Messagebox.show("Se ha Eliminado Correctamente", "Informacion", Messagebox.OK, Messagebox.INFORMATION);
 	}
 	@Command
 	@NotifyChange({"nombre", "apellido", "email","sexo"})
