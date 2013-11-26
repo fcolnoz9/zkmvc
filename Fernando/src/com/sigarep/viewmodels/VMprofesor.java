@@ -99,11 +99,10 @@ public class VMprofesor {
 	@Command
 	@NotifyChange({"nombre", "apellido", "email","sexo"})
 	public void mostrarSeleccionado(){
-		Profesor pro =getProfeseleccionado();
-		nombre=pro.getNombre();
-		apellido=pro.getApellido();
-		email=pro.getEmail();
-		sexo=pro.getSexo();
+		nombre=getProfeseleccionado().getNombre();
+		apellido=getProfeseleccionado().getApellido();
+		email=getProfeseleccionado().getEmail();
+		sexo=getProfeseleccionado().getSexo();
 	}
 	
 }
