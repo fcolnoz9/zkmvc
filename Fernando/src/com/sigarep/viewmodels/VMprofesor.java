@@ -20,8 +20,6 @@ public class VMprofesor {
 	private String nombre;private String apellido; private String email;private String sexo;
 	private List<Profesor> listaProfesor;
 	private Profesor profeseleccionado;
-    @Wire Textbox txtnombre;
-    @Wire Window ventana;
     public String getNombre() {
 		return nombre;
 	}
