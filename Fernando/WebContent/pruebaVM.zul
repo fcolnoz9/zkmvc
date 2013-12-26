@@ -1,25 +1,4 @@
 <zk>
-<style id="estilo">
-        .fgrid tr.z-row td.z-row-inner,tr.z-row,div.z-grid-body
-        div.z-cell,div.z-grid { border: none; overflow: hidden; zoom: 1;
-        background: white; border-top: none; border-left: none;
-        border-right: none; border-bottom: none; }
-		
-        .fgrid .z-grid-odd .fgrid .z-row-inner,.fgrid .z-grid-odd
-        .z-cell { background-color: #F7F7F7; border-bottom: 1px solid
-        transparent; border-left: 1px solid transparent; border-top: 1px
-        solid transparent; }
-
-        .fgrid .z-grid-odd .fgrid.z-row-inner,.fgrid.z-grid-odd
-        .z-cell,.fgrid.z-grid-odd { background: none repeat scroll 0 0
-        transparent; }
-
-        .fgrid tr.z-grid-odd td.z-row-inner,.fgrid tr.z-grid-odd
-        .z-cell,.fgrid tr.z-grid-odd { background: white }
-
-        .fgrid tr.z-row td.z-row-inner,.fgrid tr.z-row .z-cell {
-        background: white; border-top: none; }
-    </style>
 
 <window id="ventana" title="Registro Profesores" border="normal" sclass="sysWin" contentStyle="overflow:auto" apply="org.zkoss.bind.BindComposer"
                                height="700px" viewModel="@id('vm') @init('com.sigarep.viewmodels.VMprofesor')" >
@@ -79,17 +58,17 @@
    	<caption label="Listado de Profesores" />
    	<space />
    	<space />
-   	<listbox id="profeListbox" height="260px" model="@bind(vm.listaProfesor)" selectedItem="@bind(vm.profeseleccionado)"   
+   	<listbox id="profeListbox" height="260px" model="@load(vm.listaProfesor)" selectedItem="@bind(vm.profeseleccionado)"   
    			 onSelect="@command('mostrarSeleccionado')" emptyMessage="No hay profesores registrados" mold="paging" pageSize="5">
    		<auxhead sclass="category-center">
    		     <auxheader colspan="1" align="center" image="images/search-016x016.png">
-                <textbox instant="true"  width="100px" />
+                <textbox id="filtroNombre" instant="true"  width="100px" value="@bind(vm.filtros.nombre)" onChange="@command('filtros')" />
             </auxheader>
              <auxheader colspan="1" align="center" image="images/search-016x016.png">
-                <textbox instant="true"  width="100px" />
+                <textbox id="filtroApellido" instant="true"  width="100px" value="@bind(vm.filtros.apellido)" onChange="@command('filtros')" />
             </auxheader>
              <auxheader colspan="1" align="center" image="images/search-016x016.png">
-                <textbox instant="true"  width="100px" />
+                <textbox id="filtroSexo" instant="true"  width="100px" value="@bind(vm.filtros.sexo)" onChange="@command('filtros')" />
             </auxheader>
    		</auxhead>
    			 

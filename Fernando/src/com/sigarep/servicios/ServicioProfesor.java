@@ -1,20 +1,18 @@
 package com.sigarep.servicios;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
-
 import com.sigarep.modelo.Profesor;
+import com.sigarep.modelo.ProfesorFiltros;
 import com.sigarep.repository.IProfesorDAO;
 // El servicio interactua con la base de datos
 
 @Service("sp") //Definiendo la variable servicio
 public class ServicioProfesor{
 	private @Autowired IProfesorDAO pr ;
+	private Profesor p;
 
 	public void guardar(Profesor pro) {
 		
@@ -33,21 +31,26 @@ public class ServicioProfesor{
 		List<Profesor> profesorLista=pr.findAll();
 	    return profesorLista ;
 	}
-	public List<Profesor> buscarP(String nombre){
-		List<Profesor> result = new LinkedList<Profesor>();
-		if (nombre==null || "".equals(nombre)){//si el nombre es null o vacio,el resultado va a ser la lista completa de todos los profesores
-			result = listadoProfesor();
-		}else{//caso contrario se recorre toda la lista y busca los profesores con el nombre indicado en la caja de texto y tambien busca todos los que tengan  las letras iniciales de ese nombre. Realiza la busqueda con el apellido e inicial del apellido.
-			for (Profesor p: listadoProfesor()){
-				if (p.getNombre().toLowerCase().contains(nombre.toLowerCase())||
-					p.getApellido().toLowerCase().contains(nombre.toLowerCase())){
+	public List<Profesor> buscarP(ProfesorFiltros filtros){
+		List<Profesor> result = new ArrayList<Profesor>();
+		String nom = filtros.getNombre().toLowerCase();
+        String ape = filtros.getApellido().toLowerCase();
+        String sex = filtros.getSexo().toLowerCase();
+        if(nom==null || ape==null ||  sex==null){
+        	result= listadoProfesor();
+        }
+        else{
+			for (Profesor p: listadoProfesor())
+			{
+				if (p.getNombre().toLowerCase().contains(nom)&&
+					p.getApellido().toLowerCase().contains(ape)&&
+					p.getSexo().toLowerCase().contains(sex)){
 					result.add(p);
 				}
 			}
-		}
+        }
 		return result;
-
+        } 
 	}
-}
 
 	
