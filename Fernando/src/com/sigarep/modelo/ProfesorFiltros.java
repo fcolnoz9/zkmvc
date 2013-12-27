@@ -1,5 +1,7 @@
 package com.sigarep.modelo;
 
+
+//Clase de Filtros para Profesor, por nombre, apellido,sexo
 public class ProfesorFiltros {
 	private String nombre="",apellido="",email="",sexo="";
 
